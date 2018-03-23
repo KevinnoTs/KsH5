@@ -30,7 +30,11 @@
                 outputText = "你猜得大了一丢丢！";
             }
         }else {
-            outputText = "猜小了！";
+            if (dice-guess>1){
+                outputText = "你猜得太小了！";
+            }else {
+                outputText = "你猜得小了一丢丢！";
+            }
         }
         document.getElementById("result").innerHTML = outputText;
     }
