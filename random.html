@@ -5,7 +5,8 @@
     <title>猜骰子</title>
 </head>
 <body>
-<div id="result"></div>
+<div id="result">大家一起来猜骰子！</div>
+</body>
 <script>
 
     var dice = Math.floor(Math.random() * 6) + 1;
@@ -15,6 +16,7 @@
     console.info(dice);
 
     function guessDice() {
+
         if (bingo) {
             return;
         }
@@ -48,5 +50,4 @@
     guessDice();
 
 </script>
-</body>
 </html>
