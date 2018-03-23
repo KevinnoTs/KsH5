@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>猜骰子</title>
+</head>
+<body>
+<div id="result"></div>
+<script>
+
+    var dice = Math.floor(Math.random() * 6) + 1;
+    console.info(dice);
+    var bingo = false;
+
+
+    function guessDice() {
+
+        if(bingo){
+            return;
+        }
+        var guess = prompt("请猜骰子大小！");
+        if (guess == dice) {
+            outputText = "赌神，你猜中了！";
+            outputText += "<br/><img src=\"images/" + dice + ".png\" />";
+            bingo = true;
+        } else if (guess>dice){
+            if (guess-dice>1){
+                outputText = "你猜得太大了！";
+            }else {
+                outputText = "你猜得大了一丢丢！";
+            }
+        }else {
+            outputText = "猜小了！";
+        }
+        document.getElementById("result").innerHTML = outputText;
+    }
+
+    var outputText;
+    guessDice();
+    guessDice();
+    guessDice();
+
+    // document.getElementById("result").innerHTML = dice + "<img src=\"images/" + dice + ".png\" />";
+    // document.write("<img src=\"images/"+dice+".png\" />");
+</script>
+</body>
+</html>
