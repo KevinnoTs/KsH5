@@ -34,7 +34,7 @@
         }
         var diff = Math.abs(guess - dice);
         if (guess == dice) {
-            document.getElementById("inputDiv").innerHTML = "赌神，你猜中了！" + "<br/><img src=\"images/" + dice + ".png\" />";
+            document.getElementById("inputDiv").innerHTML = "赌神，你猜中了！" + "<br/><img src=\"../images/" + dice + ".png\" />";
             document.getElementById("inputId").value = "大家一起来猜骰子！";
         } else if (guess > dice) {
             if (diff > 1) {
