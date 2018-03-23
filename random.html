@@ -9,43 +9,44 @@
 <script>
 
     var dice = Math.floor(Math.random() * 6) + 1;
-    console.info(dice);
     var bingo = false;
+    var outputText, diff;
 
+    console.info(dice);
 
     function guessDice() {
-
-        if(bingo){
+        if (bingo) {
             return;
         }
         var guess = prompt("请猜骰子大小！");
-        if (guess == dice) {
-            outputText = "赌神，你猜中了！";
-            outputText += "<br/><img src=\"images/" + dice + ".png\" />";
+        if(!Number.isInteger(guess/1)||guess>6||guess<1){
+            alert("猜骰子请输入1~6的数字！");
+            return;
+        }
+        diff = Math.abs(guess - dice);
+        if (guess === dice) {
+            outputText = "赌神，你猜中了！" + "<br/><img src=\"images/" + dice + ".png\" />";
             bingo = true;
-        } else if (guess>dice){
-            if (guess-dice>1){
+        } else if (guess > dice) {
+            if (diff > 1) {
                 outputText = "你猜得太大了！";
-            }else {
+            } else {
                 outputText = "你猜得大了一丢丢！";
             }
-        }else {
-            if (dice-guess>1){
+        } else {
+            if (diff > 1) {
                 outputText = "你猜得太小了！";
-            }else {
+            } else {
                 outputText = "你猜得小了一丢丢！";
             }
         }
         document.getElementById("result").innerHTML = outputText;
     }
 
-    var outputText;
     guessDice();
     guessDice();
     guessDice();
 
-    // document.getElementById("result").innerHTML = dice + "<img src=\"images/" + dice + ".png\" />";
-    // document.write("<img src=\"images/"+dice+".png\" />");
 </script>
 </body>
 </html>
