@@ -10,36 +10,45 @@
 <div id="sign">请输入您要下注积分，并选择竞猜大小：</div>
 <form id="guess" title="guess">
     <input type="text" value="50" id="guessScore" title="guessScore">
-    <input type="button" value="大" onclick="guessBig()">
-    <input type="button" value="小" onclick="guessSmall()">
+    <input type="button" value="大" onclick="guessBig()" id="buttonBig">
+    <input type="button" value="小" onclick="guessSmall()" id="buttonSmall">
 </form>
 </body>
 </html>
 <script>
-    var sizeGuess,guessRound=0,finalScore=1000;
+    var sizeGuess,guessRound=0,finalScore=1000,guessScore;
     function guessBig() {
         sizeGuess = "大";
-        guessTheSize();
+        isPositiveInteger();
         // return;
     }
     function guessSmall() {
         sizeGuess = "小";
-        guessTheSize();
+        isPositiveInteger();
         // return;
+    }
+    function isPositiveInteger() {
+        guessScore = document.getElementById("guessScore").value;
+
+        if(guessScore<0||guessScore%1!=0){
+            document.getElementById("result").innerHTML = "押注积分只可以为正整数！";
+        }
+        else if(guessScore>finalScore){
+            document.getElementById("result").innerHTML = "押注积分大于剩余积分！";
+        }
+        else{
+            guessTheSize();
+        }
     }
     function guessTheSize () {
         var sizeNO = Math.random();
         var sizeResult;
-        var guessScore = document.getElementById("guessScore").value;
         guessRound += 1;
         if (sizeNO<0.5){
             sizeResult = "小";
         }else {
             sizeResult = "大";
         }
-
-
-
         if(sizeGuess == sizeResult){
             finalScore = finalScore + guessScore * 2;
             document.getElementById("result").innerHTML = "第 "+guessRound+" 回合，您猜对了！加 " +guessScore * 2+ " 分！";
@@ -48,7 +57,16 @@
             finalScore = finalScore - guessScore;
             document.getElementById("result").innerHTML = "第"+guessRound+"回合，您猜错了！减 " +guessScore+" 分！";
         }
+        if(finalScore<=0){
+            finalScore = 0;
+            document.getElementById("sign").innerHTML = "您已经没有积分了……GAME OVER！刷新后从新开始！";
+            document.getElementById( "guessScore").style.display = "none";
+            document.getElementById( "buttonBig").style.display = "none";
+            document.getElementById( "buttonSmall").style.display = "none";
+        }
         document.getElementById("score").innerHTML = "您目前有 "+finalScore+" 分";
+    }
+
 
         // console.info(sizeNO);
         // console.info(sizeResult);
@@ -57,7 +75,7 @@
         // console.info(finalScore);
 
         // return;
-    }
+
 
 
 </script>
