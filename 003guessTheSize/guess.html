@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="result"></div>
+<div id="score">您目前有 1000 分</div>
+<div id="sign">请输入您要下注积分，并选择竞猜大小：</div>
+<form id="guess" title="guess">
+    <input type="text" value="50" id="guessScore" title="guessScore">
+    <input type="button" value="大" onclick="guessBig()">
+    <input type="button" value="小" onclick="guessSmall()">
+</form>
+</body>
+</html>
+<script>
+    var sizeGuess,guessRound=0,finalScore=1000;
+    function guessBig() {
+        sizeGuess = "大";
+        guessTheSize();
+        // return;
+    }
+    function guessSmall() {
+        sizeGuess = "小";
+        guessTheSize();
+        // return;
+    }
+    function guessTheSize () {
+        var sizeNO = Math.random();
+        var sizeResult;
+        var guessScore = document.getElementById("guessScore").value;
+        guessRound += 1;
+        if (sizeNO<0.5){
+            sizeResult = "小";
+        }else {
+            sizeResult = "大";
+        }
+
+
+
+        if(sizeGuess == sizeResult){
+            finalScore = finalScore + guessScore * 2;
+            document.getElementById("result").innerHTML = "第 "+guessRound+" 回合，您猜对了！加 " +guessScore * 2+ " 分！";
+
+        }else{
+            finalScore = finalScore - guessScore;
+            document.getElementById("result").innerHTML = "第"+guessRound+"回合，您猜错了！减 " +guessScore+" 分！";
+        }
+        document.getElementById("score").innerHTML = "您目前有 "+finalScore+" 分";
+
+        // console.info(sizeNO);
+        // console.info(sizeResult);
+        // console.info(guessRound);
+        // console.info(guessScore);
+        // console.info(finalScore);
+
+        // return;
+    }
+
+
+</script>
